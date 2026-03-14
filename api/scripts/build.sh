@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "build_script"
+release_type=$1 # patch, minor, major
 
-release_type=$1 // patch, minor, major
+echo "build_script"
 
 rm -rf *.zip
 
@@ -23,7 +23,5 @@ version=$(npm --loglevel silent run version)
 export application_version=$version
 
 cd ..
-
-echo "$pwd"
 
 zip -x ".git/*" -x ".DS_Store" -r "$application_version.zip" ./
