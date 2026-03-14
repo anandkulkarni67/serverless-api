@@ -1,33 +1,34 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Description: AWS SAM template for a a serverless API
 
+Parameters:
+  ApplicationName:
+    Type: String
+    Default: 'serverless-api'
+
 Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
+  
+  APIFunction:
+    Type: AWS::Lambda::Function
     Properties:
-      CodeUri: ../../api
-      Handler: ./dist/index.handler
-      Runtime: nodejs22.x
-      Policies: AmazonAPIGatewayInvokeFullAccess
-      Events:
-        HelloWorldApi:
-          Type: Api
-          Properties:
-            Path: /
-            Method: GET
-            RestApiId: !Ref HelloWorldApiGateway
+      Handler: ./api/dist/index.handler
+      Role: 
+        Fn::ImportValue:
+          !Sub '${ApplicationName}-lambda'
+      Code:
+        ZipFile: |            ## Placeholder code to create a resource.
+          exports.handler = async (event) => {
+            console.log("Hello, World!");
+            return {
+              statusCode: 200,
+              body: JSON.stringify('Hello from Lambda!'),
+            };
+          };
+      Runtime: nodejs20.x
+      Timeout: 5
 
-  HelloWorldApiGateway:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: Prod
-      # Optional: Add CORS configuration if needed
-      # Cors:
-      #   AllowOrigin: "'*'"
-      #   AllowMethods: "'GET,POST,PUT,DELETE'"
-
-Outputs:
-  ApiEndpoint:
-    Description: "API Gateway endpoint URL"
-    Value: !Sub "https://${HelloWorldApiGateway}.execute-api.${AWS::Region}://"
+# Outputs:
+#   ApiEndpoint:
+#     Description: "API Gateway endpoint URL"
+#     Value: !Sub "https://${HelloWorldApiGateway}.execute-api.${AWS::Region}://"

@@ -1,0 +1,26 @@
+name: Initialize Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  initialize:
+    name: build-artifact
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Configure AWS Credentials for deployment
+        uses: aws-actions/configure-aws-credentials@v5.1.1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.OIDC_ROLE_NAME }}
+          output-credentials: true
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: initialize aws resources
+        id: initialize
+        run: |
+          application_name=${GITHUB_REPOSITORY#*/}
+          echo "The repositry name is: $application_name"
+          chmod +x /scripts/initialize.sh
+          ./scripts/initialize.sh $application_name
