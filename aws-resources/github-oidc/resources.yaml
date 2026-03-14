@@ -46,8 +46,7 @@ Resources:
                   - cloudformation:*
                   - iam:*
                   - lambda:*
-
-
+                  - apigateway:*
 
 Outputs:
   GithubOIDCAuthenticationRoleArn:

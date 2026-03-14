@@ -16,17 +16,3 @@ if [ $? -ne 0 ]; then
     echo "Failed to create/ update stack. Exiting."
     exit 1
 fi
-
-# echo "Creation initiated. Waiting for stack to reach CREATE_COMPLETE status..."
-
-# aws cloudformation wait stack-create-complete \
-#     --stack-name "$application_name-application" \
-#     --region "$region"
-
-# if [ $? -eq 0 ]; then
-#     echo "Stack $application_name is CREATE_COMPLETE. Proceeding to the next script."
-# else
-#     echo "Stack $application_name failed to create or the wait command timed out."
-#     echo "Check the AWS CloudFormation console or use 'aws cloudformation describe-stack-events' for details."
-#     exit 1
-# fi
