@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Creation initiated. Waiting for stack to reach DELETE_COMPLETE status..."
+echo "Deletion initiated. Waiting for stack to reach DELETE_COMPLETE status..."
 
 aws cloudformation wait stack-delete-complete \
     --stack-name "$application_name-security" \
