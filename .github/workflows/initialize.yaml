@@ -5,9 +5,12 @@ on:
 
 jobs:
   initialize:
-    name: build-artifact
+    name: initialize-aws-resources
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Configure AWS Credentials for deployment
         uses: aws-actions/configure-aws-credentials@v5.1.1
