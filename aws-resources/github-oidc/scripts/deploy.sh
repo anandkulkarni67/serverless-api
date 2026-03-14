@@ -10,8 +10,8 @@ echo "Starting AWS CloudFormation stack creation/ updation for $application_name
 aws cloudformation deploy \
     --stack-name "$application_name-github-oidc" \
     --template-file $template_file \
-    --region "$region" \
-    --parameters "ParameterKey=GithubRepositoryName,ParameterValue=$application_name" "ParameterKey=GithubUserName,ParameterValue=$github_username" \
+    --region $region \
+    --parameter-overrides "ParameterKey=GithubRepositoryName,ParameterValue=$application_name" "ParameterKey=GithubUserName,ParameterValue=$github_username" \
     --capabilities CAPABILITY_NAMED_IAM
 
 if [ $? -ne 0 ]; then
