@@ -2,9 +2,16 @@ name: Deploy a Project
 
 on:
   workflow_dispatch:
+    inputs:
+      target_job:
+        description: 'Which job to run?'
+        type: choice
+        options:
+        - aws-resources
+        required: true
 
 jobs:
-  initialize:
+  aws-resources:
     name: deploy-aws-resources
     runs-on: ubuntu-latest
     environment: production
