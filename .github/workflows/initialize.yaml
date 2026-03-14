@@ -24,5 +24,6 @@ jobs:
         id: initialize
         run: |
           echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
-          chmod +x /scripts/initialize.sh
+          echo "Current Directory is: $PWD"
+          chmod +x ./scripts/initialize.sh
           ./scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
