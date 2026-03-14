@@ -5,11 +5,10 @@ template_file="./aws-resources/security/resources.yaml"
 # Replace with your actual region if different
 region="us-east-1"
 
-echo "Starting AWS CloudFormation stack creation for $application_name..."
+echo "Starting AWS CloudFormation stack deletion for $application_name..."
 
-aws cloudformation create-stack \
+aws cloudformation delete-stack \
     --stack-name "$application_name-security" \
-    --template-body file://"$template_file" \
     --region "$region" \
     --capabilities CAPABILITY_NAMED_IAM
 
@@ -18,14 +17,14 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Creation initiated. Waiting for stack to reach CREATE_COMPLETE status..."
+echo "Creation initiated. Waiting for stack to reach DELETE_COMPLETE status..."
 
-aws cloudformation wait stack-create-complete \
+aws cloudformation wait stack-delete-complete \
     --stack-name "$application_name-security" \
     --region "$region"
 
 if [ $? -eq 0 ]; then
-    echo "Stack $application_name is CREATE_COMPLETE. Proceeding to the next script."
+    echo "Stack $application_name is DELETE_COMPLETE."
 else
     echo "Stack $application_name failed to delete or the wait command timed out."
     echo "Check the AWS CloudFormation console or use 'aws cloudformation describe-stack-events' for details."

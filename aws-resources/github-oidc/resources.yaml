@@ -36,14 +36,18 @@ Resources:
                   token.actions.githubusercontent.com:sub: !Sub 'repo:${GithubUserName}/${GithubRepositoryName}:environment:production'
                   token.actions.githubusercontent.com:aud: sts.amazonaws.com
       Policies:
-        - PolicyName: create-stack-permissions
+        - PolicyName: create-resources-permissions
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Resource: '*'
                 Action:
-                  - cloudformation:CreateStack
+                  - cloudformation:*
+                  - iam:*
+                  - lambda:*
+
+
 
 Outputs:
   GithubOIDCAuthenticationRoleArn:

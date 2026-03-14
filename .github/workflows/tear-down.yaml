@@ -1,0 +1,29 @@
+name: Tear Down Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  initialize:
+    name: initialize-aws-resources
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials for deployment
+        uses: aws-actions/configure-aws-credentials@v5.1.1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.OIDC_ROLE_NAME }}
+          output-credentials: true
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: initialize aws resources
+        id: initialize
+        run: |
+          echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
+          echo "Current Directory is: $PWD"
+          chmod +x ./scripts/tear-down.sh
+          ./scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
