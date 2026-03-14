@@ -9,8 +9,7 @@ echo "Starting AWS CloudFormation stack deletion for $application_name..."
 
 aws cloudformation delete-stack \
     --stack-name "$application_name-security" \
-    --region "$region" \
-    --capabilities CAPABILITY_NAMED_IAM
+    --region "$region"
 
 if [ $? -ne 0 ]; then
     echo "Failed to initiate stack creation. Exiting."
