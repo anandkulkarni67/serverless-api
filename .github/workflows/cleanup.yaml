@@ -1,11 +1,11 @@
-name: Tear Down Project
+name: Tear Down a Project
 
 on:
   workflow_dispatch:
 
 jobs:
   initialize:
-    name: initialize-aws-resources
+    name: cleanup-aws-resources
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -25,5 +25,5 @@ jobs:
         run: |
           echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
           echo "Current Directory is: $PWD"
-          chmod +x ./scripts/tear-down.sh
-          ./scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
+          chmod +x ./scripts/cleanup.sh
+          ./scripts/cleanup.sh ${{ vars.APPLICATION_NAME }}
