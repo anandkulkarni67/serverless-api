@@ -36,17 +36,14 @@ Resources:
                   token.actions.githubusercontent.com:sub: !Sub 'repo:${GithubUserName}/${GithubRepositoryName}:environment:production'
                   token.actions.githubusercontent.com:aud: sts.amazonaws.com
       Policies:
-        - PolicyName: S3-read-write-access
+        - PolicyName: create-stack-permissions
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Resource: '*'
                 Action:
-                  - s3:PutObject
-                  - s3:GetObject
-                  - s3:DeleteObject
-                  - s3:ListBucket
+                  - cloudformation:CreateStack
 
 Outputs:
   GithubOIDCAuthenticationRoleArn:
