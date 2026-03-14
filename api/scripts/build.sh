@@ -22,6 +22,4 @@ version=$(npm --loglevel silent run version)
 
 export application_version=$version
 
-cd ..
-
 zip -x ".git/*" -x ".DS_Store" -r "$application_version.zip" ./
