@@ -1,7 +1,6 @@
 #!/bin/bash
 
 application_name=$1
-template_file="./aws-resources/security/resources.yaml"
 # Replace with your actual region if different
 region="us-east-1"
 
