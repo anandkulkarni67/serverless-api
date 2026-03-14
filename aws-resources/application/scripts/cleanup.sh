@@ -7,7 +7,7 @@ region="us-east-1"
 
 echo "Starting AWS CloudFormation stack deletion for $application_name..."
 
-aws cloudformation create-stack \
+aws cloudformation delete-stack \
     --stack-name "$application_name-application" \
     --region "$region" \
     --capabilities CAPABILITY_AUTO_EXPAND
