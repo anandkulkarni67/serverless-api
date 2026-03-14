@@ -20,8 +20,8 @@ jobs:
           output-credentials: true
       - name: Checkout repository
         uses: actions/checkout@v6
-      - name: initialize aws resources
-        id: initialize
+      - name: cleanup aws resources
+        id: cleanup
         run: |
           echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
           echo "Current Directory is: $PWD"

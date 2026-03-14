@@ -1,11 +1,11 @@
-name: Initialize Project
+name: Deploy a Project
 
 on:
   workflow_dispatch:
 
 jobs:
   initialize:
-    name: initialize-aws-resources
+    name: deploy-aws-resources
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -20,8 +20,8 @@ jobs:
           output-credentials: true
       - name: Checkout repository
         uses: actions/checkout@v6
-      - name: initialize aws resources
-        id: initialize
+      - name: deploy aws resources
+        id: deploy
         run: |
           echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
           echo "Current Directory is: $PWD"
