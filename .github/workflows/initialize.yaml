@@ -20,7 +20,6 @@ jobs:
       - name: initialize aws resources
         id: initialize
         run: |
-          application_name=${GITHUB_REPOSITORY#*/}
-          echo "The repositry name is: $application_name"
+          echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
           chmod +x /scripts/initialize.sh
-          ./scripts/initialize.sh $application_name
+          ./scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
