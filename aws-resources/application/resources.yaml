@@ -12,6 +12,7 @@ Resources:
   APIFunction:
     Type: AWS::Lambda::Function
     Properties:
+      FunctionName: !Sub '${ApplicationName}-api-lambda'
       Handler: ./api/dist/index.handler
       Role: 
         Fn::ImportValue:
