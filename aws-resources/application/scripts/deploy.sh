@@ -8,7 +8,7 @@ echo "Starting AWS CloudFormation stack creation/ updation for $application_name
 
 aws cloudformation deploy \
     --stack-name "$application_name-application" \
-    --template-body file://"$template_file" \
+    --template-file file://"$template_file" \
     --region "$region" \
     --capabilities CAPABILITY_AUTO_EXPAND
 
