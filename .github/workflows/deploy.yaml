@@ -73,15 +73,11 @@ jobs:
           ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }}
           artifact_version=$(npm --loglevel silent run version)
           echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
-      - name: test-step-outputs
-        id: test-step-outputs
-        run: |
-          echo " ${{ steps.deploy-lambda-function.outputs.artifact-version }}"
-      # - name: Upload application artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ${{ steps.deploy-lambda-function.outputs.artifact-version }}
-      #     path: ./
-      #     overwrite: true
-      #     if-no-files-found: warn
-      #     retention-days: 1
+      - name: Upload application artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.deploy-lambda-function.outputs.artifact-version }}
+          path: ./
+          overwrite: true
+          if-no-files-found: warn
+          retention-days: 1
