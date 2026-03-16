@@ -6,7 +6,7 @@ echo "build_script"
 
 rm -rf *.zip
 
-npm version $artifact_version
+npm version $artifact_version --no-git-tag-version
 
 cd api
 

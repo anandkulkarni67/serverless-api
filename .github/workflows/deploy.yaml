@@ -50,7 +50,7 @@ jobs:
         run: |
           chmod +x ./aws-resources/scripts/initialize.sh
           ./aws-resources/scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
-      - name: Commit and push changes
+      - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: Update project version
@@ -93,6 +93,10 @@ jobs:
           chmod +x ./api/scripts/deploy.sh
           ./api/scripts/build.sh ${{ steps.update-version.outputs.artifact-version }}
           ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }} ${{ steps.update-version.outputs.artifact-version }}
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Update project version
       - name: Upload Application Artifact
         uses: actions/upload-artifact@v4
         with:
