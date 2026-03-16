@@ -1,12 +1,12 @@
 #!/bin/bash
 
-release_type=$1 # patch, minor, major
+artifact_version=$1
 
 echo "build_script"
 
 rm -rf *.zip
 
-npm version $release_type
+npm version $artifact_version
 
 cd api
 
@@ -14,7 +14,7 @@ rm -rf node_modules
 
 rm -rf dist
 
-npm version $release_type
+npm version $artifact_version
 
 npm install
 
