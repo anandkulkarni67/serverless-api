@@ -68,6 +68,7 @@ jobs:
         id: deploy-lambda-function
         run: |
           echo "$PWD"
+          echo "$(ls -l)"
           chmod +x ./api/scripts/build.sh
           chmod +x ./api/scripts/deploy.sh
           artifact_version=$(npm --loglevel silent run version)
