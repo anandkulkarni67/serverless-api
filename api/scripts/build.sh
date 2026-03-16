@@ -14,7 +14,7 @@ rm -rf dist
 
 npm version $release_type
 
-npm install --omit=dev
+npm install
 
 npm run build
 
