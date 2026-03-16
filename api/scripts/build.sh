@@ -18,8 +18,8 @@ npm install --omit=dev
 
 npm run build
 
-version=$(npm --loglevel silent run version)
+# version=$(npm --loglevel silent run version)
 
-export application_version=$version
+# export application_version=$version
 
-zip -x ".git/*" -x ".DS_Store" -r "$application_version.zip" ./
+# zip -x ".git/*" -x ".DS_Store" -r "$application_version.zip" ./
