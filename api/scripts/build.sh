@@ -21,3 +21,5 @@ npm run build
 version=$(npm --loglevel silent run version)
 
 zip -r "$application_version.zip" ./
+
+echo "$(ls -l)"
