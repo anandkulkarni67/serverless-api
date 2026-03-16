@@ -24,6 +24,7 @@ jobs:
 
   aws-resources:
     name: deploy-aws-resources
+    if: inputs.target_job == 'deploy-aws-resources'
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -47,7 +48,8 @@ jobs:
           ./scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
 
   api-lambda:
-    name: deploy-aws-resources
+    name: deploy-api-lambda
+    if: inputs.target_job == 'deploy-api-lambda'
     runs-on: ubuntu-latest
     environment: production
     permissions:
