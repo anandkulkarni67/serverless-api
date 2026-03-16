@@ -35,7 +35,9 @@ jobs:
 
   store-artifact:
     name: initialize-artifact_version
-    needs: aws-resources || api-lambda
+    needs: 
+      - aws-resources
+      - api-lambda
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -81,7 +83,9 @@ jobs:
 
   api-lambda:
     name: deploy-api-lambda
-    needs: update-artifact-version && aws-resources
+    needs:
+      - update-artifact-version
+      - aws-resources
     if: ${{ github.event.inputs.target_job == 'deploy-api-lambda' || github.event.inputs.target_job == 'all' }}
     runs-on: ubuntu-latest
     environment: production
