@@ -67,11 +67,10 @@ jobs:
       - name: deploy lambda function
         id: deploy-lambda-function
         run: |
-          echo "$PWD"
-          echo "$(ls -l)"
           chmod +x ./api/scripts/build.sh
           chmod +x ./api/scripts/deploy.sh
           artifact_version=$(npm --loglevel silent run version)
+          echo "$artifact_version"
           ./api/scripts/build.sh patch
           ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }} $artifact_version
           echo "artifact_version=$artifact_version" >> "$GITHUB_OUTPUT"
