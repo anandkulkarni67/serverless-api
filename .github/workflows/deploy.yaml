@@ -10,15 +10,15 @@ on:
         - deploy-aws-resources
         - deploy-api-lambda
         required: true
-      # release_type:
-      #   description: 'Choose a type of release.'
-      #   type: choice
-      #   options:
-      #   - patch
-      #   - minor
-      #   - major
-      #   required: true
-      #   default: patch
+      release_type:
+        description: 'Choose a type of release.'
+        type: choice
+        options:
+        - patch
+        - minor
+        - major
+        required: true
+        default: patch
 
 jobs:
 
