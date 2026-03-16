@@ -14,4 +14,4 @@ echo "$PWD"
 
 echo "$(ls -l)"
 
-aws lambda update-function-code --function-name "$application_name-api-lambda" --zip-file fileb://$artifact_vesion.zip
+aws lambda update-function-code --function-name "$application_name-api-lambda" --zip-file fileb://../$artifact_vesion.zip
