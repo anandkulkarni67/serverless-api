@@ -25,7 +25,6 @@ jobs:
 
   update-artifact-version:
     name: update-artifact-version
-    needs: always
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -34,7 +33,7 @@ jobs:
         run: |
           npm version ${{ github.event.inputs.release-type }}
 
-  create-artifact:
+  store-artifact:
     name: initialize-artifact_version
     needs: aws-resources || api-lambda
     runs-on: ubuntu-latest
