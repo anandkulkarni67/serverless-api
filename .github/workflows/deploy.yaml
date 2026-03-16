@@ -30,6 +30,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      contents: write
     steps:
       - name: Configure AWS Credentials for deployment
         uses: aws-actions/configure-aws-credentials@v5.1.1
@@ -71,6 +72,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      contents: write
     steps:
       - name: Configure AWS Credentials for deployment
         uses: aws-actions/configure-aws-credentials@v5.1.1
