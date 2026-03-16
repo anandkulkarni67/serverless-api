@@ -26,7 +26,7 @@ jobs:
   update-artifact-version:
     name: update-artifact-version
     needs: always
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     environment: production
     steps:
       - name: update-version
@@ -37,7 +37,7 @@ jobs:
   create-artifact:
     name: initialize-artifact_version
     needs: aws-resources || api-lambda
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     environment: production
     steps:
       - name: extract-version
