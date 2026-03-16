@@ -24,7 +24,7 @@ jobs:
 
   aws-resources:
     name: deploy-aws-resources
-    if: inputs.target_job == 'deploy-aws-resources'
+    if: ${{ github.event.inputs.target_job == 'deploy-aws-resources' }}
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -49,7 +49,7 @@ jobs:
 
   api-lambda:
     name: deploy-api-lambda
-    if: inputs.target_job == 'deploy-api-lambda'
+    if: ${{ github.event.inputs.target_job == 'deploy-api-lambda' }}
     runs-on: ubuntu-latest
     environment: production
     permissions:
