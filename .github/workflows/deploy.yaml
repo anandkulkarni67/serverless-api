@@ -9,6 +9,7 @@ on:
         options:
         - deploy-aws-resources
         - deploy-api-lambda
+        - all
         required: true
       release_type:
         description: 'Choose a type of release.'
@@ -22,9 +23,41 @@ on:
 
 jobs:
 
+  update-artifact-version:
+    name: update-artifact-version
+    needs: always
+    run-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: update-version
+        id: update-version
+        run: |
+          npm version ${{ github.event.inputs.release-type }}
+
+  create-artifact:
+    name: initialize-artifact_version
+    needs: aws-resources || api-lambda
+    run-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: extract-version
+        id: extract-version
+        run: |
+          artifact_version=$(npm --loglevel silent run version)
+          echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
+      - name: Upload application artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.deploy-lambda-function.outputs.artifact-version }}
+          path: ./
+          overwrite: true
+          if-no-files-found: warn
+          retention-days: 1
+
   aws-resources:
     name: deploy-aws-resources
-    if: ${{ github.event.inputs.target_job == 'deploy-aws-resources' }}
+    needs: update-artifact-version 
+    if: ${{ github.event.inputs.target_job == 'deploy-aws-resources' || github.event.inputs.target_job == 'all' }}
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -49,7 +82,8 @@ jobs:
 
   api-lambda:
     name: deploy-api-lambda
-    if: ${{ github.event.inputs.target_job == 'deploy-api-lambda' }}
+    needs: update-artifact-version && aws-resources
+    if: ${{ github.event.inputs.target_job == 'deploy-api-lambda' || github.event.inputs.target_job == 'all' }}
     runs-on: ubuntu-latest
     environment: production
     permissions:
@@ -69,15 +103,5 @@ jobs:
         run: |
           chmod +x ./api/scripts/build.sh
           chmod +x ./api/scripts/deploy.sh
-          ./api/scripts/build.sh patch
+          ./api/scripts/build.sh ${{ github.event.inputs.release-type }}
           ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }}
-          artifact_version=$(npm --loglevel silent run version)
-          echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
-      - name: Upload application artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.deploy-lambda-function.outputs.artifact-version }}
-          path: ./
-          overwrite: true
-          if-no-files-found: warn
-          retention-days: 1
