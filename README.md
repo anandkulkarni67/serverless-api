@@ -1,4 +1,4 @@
-# A Static website deployed to AWS cloudfront served from S3 with CICD implementation using AWS CodePipeline
+# A Serverless API deployed to AWS API Gateway served from Lambda with CICD implementation using Github actions.
 
 ## download and install dependencies
 ```

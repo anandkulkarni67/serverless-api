@@ -4,13 +4,24 @@ on:
   workflow_dispatch:
     inputs:
       target_job:
-        description: 'Which job to run?'
+        description: 'Choose a job to run.'
         type: choice
         options:
         - aws-resources
+        - api-lambda
         required: true
+      # release_type:
+      #   description: 'Choose a type of release.'
+      #   type: choice
+      #   options:
+      #   - patch
+      #   - minor
+      #   - major
+      #   required: true
+      #   default: patch
 
 jobs:
+
   aws-resources:
     name: deploy-aws-resources
     runs-on: ubuntu-latest
@@ -28,9 +39,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
       - name: deploy aws resources
-        id: deploy
+        id: deploy-aws-resources
         run: |
           echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
           echo "Current Directory is: $PWD"
           chmod +x ./scripts/initialize.sh
           ./scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
+
+  api-lambda:
+    name: deploy-aws-resources
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials for deployment
+        uses: aws-actions/configure-aws-credentials@v5.1.1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.OIDC_ROLE_NAME }}
+          output-credentials: true
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: deploy lambda function
+        id: deploy-lambda-function
+        run: |
+          chmod +x ./api/scripts/build.sh
+          chmod +x ./api/scripts/deploy.sh
+          artifact_version=$(npm --loglevel silent run version)
+          ./api/scripts/build.sh patch
+          ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }} $artifact_version
+          echo "artifact_version=$artifact_version" >> "$GITHUB_OUTPUT"
+      - name: Upload application artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.deploy-lambda-function.outputs.artifact_version }}
+          path: .
+          overwrite: true
+          if-no-files-found: warn
+          retention-days: 1
