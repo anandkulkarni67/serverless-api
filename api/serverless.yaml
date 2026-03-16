@@ -6,16 +6,17 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ../../api
+      CodeUri: .
       Handler: ./dist/index.handler
-      Runtime: nodejs22.x
+      Runtime: nodejs20.x
       Policies: AmazonAPIGatewayInvokeFullAccess
+      Timeout: 30
       Events:
         HelloWorldApi:
           Type: Api
           Properties:
-            Path: /
-            Method: GET
+            Path: '/{proxy+}'
+            Method: ANY
             RestApiId: !Ref HelloWorldApiGateway
 
   HelloWorldApiGateway:
@@ -26,8 +27,3 @@ Resources:
       # Cors:
       #   AllowOrigin: "'*'"
       #   AllowMethods: "'GET,POST,PUT,DELETE'"
-
-Outputs:
-  ApiEndpoint:
-    Description: "API Gateway endpoint URL"
-    Value: !Sub "https://${HelloWorldApiGateway}.execute-api.${AWS::Region}://"
