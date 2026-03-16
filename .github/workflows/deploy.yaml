@@ -42,7 +42,7 @@ jobs:
       - name: update-version
         id: update-version
         run: |
-          npm version ${{ github.event.inputs.release-type }}
+          npm version ${{ github.event.inputs.release_type }} --no-git-tag-version
           artifact_version=$(npm --loglevel silent run version)
           echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
       - name: Deploy AWS Resources
@@ -83,7 +83,7 @@ jobs:
       - name: update-version
         id: update-version
         run: |
-          npm version ${{ github.event.inputs.release-type }}
+          npm version ${{ github.event.inputs.release_type }} --no-git-tag-version
           artifact_version=$(npm --loglevel silent run version)
           echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
       - name: deploy lambda function
