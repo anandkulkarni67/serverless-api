@@ -34,10 +34,15 @@ jobs:
           npm version ${{ github.event.inputs.release-type }}
 
   store-artifact:
-    name: initialize-artifact_version
-    needs: 
+    name: store-artifact
+    needs:
+      - update-artifact_version
       - aws-resources
       - api-lambda
+    if: | 
+      always() &&
+      !contains(needs.*.result, 'failure') &&
+      !contains(needs.*.result, 'cancelled')
     runs-on: ubuntu-latest
     environment: production
     steps:
