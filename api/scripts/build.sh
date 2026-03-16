@@ -6,6 +6,8 @@ echo "build_script"
 
 rm -rf *.zip
 
+npm version $release_type
+
 cd api
 
 rm -rf node_modules

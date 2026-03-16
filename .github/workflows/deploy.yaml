@@ -70,7 +70,7 @@ jobs:
           chmod +x ./api/scripts/build.sh
           chmod +x ./api/scripts/deploy.sh
           ./api/scripts/build.sh patch
-          ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }} $artifact_version
+          ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }}
           echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
       - name: test-step-outputs
         id: test-step-outputs
