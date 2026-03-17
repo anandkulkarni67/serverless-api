@@ -1,6 +1,6 @@
 {
   "name": "serverless-api",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Serverless api implementation",
   "homepage": "https://github.com/anandkulkarni67/serverless-api#readme",
   "bugs": {
