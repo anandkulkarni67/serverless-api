@@ -23,7 +23,6 @@ jobs:
       - name: cleanup aws resources
         id: cleanup
         run: |
-          echo "The repositry name is: ${{ vars.APPLICATION_NAME }}"
-          echo "Current Directory is: $PWD"
+          application_name=$(npm --loglevel silent run name)
           chmod +x ./scripts/cleanup.sh
-          ./scripts/cleanup.sh ${{ vars.APPLICATION_NAME }}
+          ./scripts/cleanup.sh $application_name

@@ -44,12 +44,14 @@ jobs:
         run: |
           npm version ${{ github.event.inputs.release_type }} --no-git-tag-version
           artifact_version=$(npm --loglevel silent run version)
+          application_name=$(npm --loglevel silent run name)
+          echo "application-name=$application_name" >> "$GITHUB_OUTPUT"
           echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
       - name: Deploy AWS Resources
         id: deploy-aws-resources
         run: |
           chmod +x ./aws-resources/scripts/deploy.sh
-          ./aws-resources/scripts/deploy.sh ${{ vars.APPLICATION_NAME }}
+          ./aws-resources/scripts/deploy.sh ${{ steps.update-version.outputs.application-name }}
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
@@ -57,7 +59,7 @@ jobs:
       - name: Upload Application Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ vars.APPLICATION_NAME }}-${{ steps.update-version.outputs.artifact-version }}
+          name: ${{ steps.update-version.outputs.application-name }}-${{ steps.update-version.outputs.artifact-version }}
           path: ./
           overwrite: true
           if-no-files-found: warn
@@ -84,7 +86,9 @@ jobs:
         id: update-version
         run: |
           npm version ${{ github.event.inputs.release_type }} --no-git-tag-version
+          application_name=$(npm --loglevel silent run name)
           artifact_version=$(npm --loglevel silent run version)
+          echo "application-name=$application_name" >> "$GITHUB_OUTPUT"
           echo "artifact-version=$artifact_version" >> "$GITHUB_OUTPUT"
       - name: deploy lambda function
         id: deploy-lambda-function
@@ -92,7 +96,7 @@ jobs:
           chmod +x ./api/scripts/build.sh
           chmod +x ./api/scripts/deploy.sh
           ./api/scripts/build.sh ${{ steps.update-version.outputs.artifact-version }}
-          ./api/scripts/deploy.sh ${{ vars.APPLICATION_NAME }} ${{ steps.update-version.outputs.artifact-version }}
+          ./api/scripts/deploy.sh ${{ steps.update-version.outputs.application-name }} ${{ steps.update-version.outputs.artifact-version }}
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
@@ -100,7 +104,7 @@ jobs:
       - name: Upload Application Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ vars.APPLICATION_NAME }}-${{ steps.update-version.outputs.artifact-version }}
+          name: ${{ steps.update-version.outputs.application-name }}-${{ steps.update-version.outputs.artifact-version }}
           path: ./
           overwrite: true
           if-no-files-found: warn

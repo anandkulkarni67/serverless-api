@@ -1,6 +1,6 @@
 #!/bin/bash
 
-application_name=$1
+application_name=$(npm --loglevel silent run name)
 
 artifact_version=$2
 

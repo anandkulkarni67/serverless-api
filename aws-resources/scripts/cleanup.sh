@@ -1,5 +1,5 @@
-application_name=$1
+#!/bin/bash
 
-./aws-resources/application/scripts/cleanup.sh $application_name
+./aws-resources/application/scripts/cleanup.sh
 
-./aws-resources/security/scripts/cleanup.sh $application_name
+./aws-resources/security/scripts/cleanup.sh

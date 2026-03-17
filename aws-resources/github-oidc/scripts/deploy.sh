@@ -1,6 +1,6 @@
 #!/bin/bash
 
-application_name=$1
+application_name=$(npm --loglevel silent run name)
 github_username=$2
 template_file="./aws-resources/github-oidc/resources.yaml"
 region="us-east-1"

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-application_name=$1
-# Replace with your actual region if different
+application_name=$(npm --loglevel silent run name)
 region="us-east-1"
 
 echo "Starting AWS CloudFormation stack creation for $application_name..."

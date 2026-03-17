@@ -1,6 +1,6 @@
 #!/bin/bash
 
-application_name=$1
+application_name=$(npm --loglevel silent run name)
 template_file="./aws-resources/application/resources.yaml"
 region="us-east-1" 
 
