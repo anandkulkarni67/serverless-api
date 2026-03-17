@@ -47,7 +47,7 @@ sample http request: http://127.0.0.1:3000/v1/greet
 3. Select following options:
   - Branch: main
   - Job: deploy-aws-resources
-  - release: any one the available ones in the dropdown. 
+  - release: patch
 ```
 
 ## Query the API on AWS
