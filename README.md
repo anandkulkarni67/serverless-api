@@ -41,7 +41,7 @@ sample http request: http://127.0.0.1:3000/v1/greet
   - release: patch
 ```
 
-## Query the API on AWS
+## Query a deployed API on AWS
 ```
 Once aws-resources and api lambda function source code are deployed. Use following url to access the api.
 url - https://{RestApiId}.execute-api.{AWSRegion}.amazonaws.com/prod/v1/greet
