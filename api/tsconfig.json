@@ -1,17 +1,15 @@
  {
   "compilerOptions": {
-    "target": "es2020",
-    "strict": true,
-    "preserveConstEnums": true,
-    "noEmit": false,
-    "sourceMap": false,
-    "module":"commonjs",
-    "allowJs": true,
     "rootDir": "./src",
-    "outDir": "dist",
-    "esModuleInterop": true, 
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true, 
-    "isolatedModules": true
-  }
+    "target": "ESNEXT",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

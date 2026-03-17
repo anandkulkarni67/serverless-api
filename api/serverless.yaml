@@ -7,8 +7,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
-      Handler: ./dist/index.handler
-      Runtime: nodejs20.x
+      Handler: dist/app.handler
+      Runtime: nodejs22.x
       Policies: AmazonAPIGatewayInvokeFullAccess
       Timeout: 30
       Events:
