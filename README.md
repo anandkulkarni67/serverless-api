@@ -21,8 +21,14 @@ sample http request: http://127.0.0.1:3000/v1/greet
    AWS_REGION ( AWS region in which resources are deployed )
    AWS_ACCOUNT_ID ( ID of the AWS account where resources are deployed )
    OIDC_ROLE_NAME ( you can find this value in the output of 'security' cloudformation stack )
-5. Create a standard environment variable.
-   APPLICATION_NAME ( must be same as the one used when creating an 'application' stack. )
+5. Install AWS CLI on local machine and configure aws credentials and run following command to create a
+   stack to install resources related to github oidc authentication.
+   ./aws-resources/github-oidc/scripts/deploy ${github-username}
+   OR
+   Go to AWS console and create a stack with following parameters.
+   - Application name - same as the one in package.json in the root directory.
+   - Github Username - Github username
+   - Github Repository - Github repository name
 ```
 
 ## AWS Resource creation
