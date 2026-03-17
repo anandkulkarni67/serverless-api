@@ -24,5 +24,5 @@ jobs:
         id: cleanup
         run: |
           application_name=$(npm --loglevel silent run name)
-          chmod +x ./scripts/cleanup.sh
-          ./scripts/cleanup.sh $application_name
+          chmod +x ./aws-resources/scripts/cleanup.sh
+          ./aws-resources/scripts/cleanup.sh $application_name
