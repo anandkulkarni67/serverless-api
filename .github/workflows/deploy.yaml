@@ -48,8 +48,8 @@ jobs:
       - name: Deploy AWS Resources
         id: deploy-aws-resources
         run: |
-          chmod +x ./aws-resources/scripts/initialize.sh
-          ./aws-resources/scripts/initialize.sh ${{ vars.APPLICATION_NAME }}
+          chmod +x ./aws-resources/scripts/deploy.sh
+          ./aws-resources/scripts/deploy.sh ${{ vars.APPLICATION_NAME }}
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
