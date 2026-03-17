@@ -25,8 +25,8 @@ Resources:
               body: JSON.stringify('Hello from Lambda!'),
             };
           };
-      Runtime: nodejs20.x
-      Timeout: 5
+      Runtime: nodejs22.x
+      Timeout: 30
   
   ApiGatewayRestApi:
     Type: AWS::ApiGateway::RestApi
