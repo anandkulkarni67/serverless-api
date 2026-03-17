@@ -41,6 +41,19 @@ sample http request: http://127.0.0.1:3000/v1/greet
   - release: patch
 ```
 
+## Project tear-down
+```
+1. Go to github actions.
+2. Click on Tear Down a project.
+3. Start the workflow.
+4. Install AWS CLI on local machine and configure aws credentials and run following command to delete a
+   stack to uninstall resources related to github oidc authentication.
+   ./aws-resources/github-oidc/scripts/cleanup
+   OR
+   Go to AWS console and delete a stack with a name that follows following pattern:
+   {application-name}-github-oidc
+```
+
 ## Query a deployed API on AWS
 ```
 Once aws-resources and api lambda function source code are deployed. Use following url to access the api.
