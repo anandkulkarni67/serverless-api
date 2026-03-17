@@ -12,7 +12,7 @@ sample http request: http://127.0.0.1:3000/v1/greet
 ```
 
 
-## GitHub integration
+## Github integration
 ```
 1. Go to the source code github repository.
 2. Click on Settings.
