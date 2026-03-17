@@ -1,7 +1,7 @@
 #!/bin/bash
 
+github_username=$1
 application_name=$(npm --loglevel silent run name)
-github_username=$2
 template_file="./aws-resources/github-oidc/resources.yaml"
 region="us-east-1"
 
@@ -11,7 +11,7 @@ aws cloudformation deploy \
     --stack-name "$application_name-github-oidc" \
     --template-file $template_file \
     --region $region \
-    --parameter-overrides "ParameterKey=GithubRepositoryName,ParameterValue=$application_name" "ParameterKey=GithubUserName,ParameterValue=$github_username" \
+    --parameter-overrides "GithubRepositoryName=$application_name" "GithubUserName=$github_username" \
     --capabilities CAPABILITY_NAMED_IAM
 
 if [ $? -ne 0 ]; then
