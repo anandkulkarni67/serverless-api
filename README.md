@@ -1,7 +1,7 @@
 # A Serverless API deployed to AWS API Gateway served from Lambda with CICD implementation using Github actions.
 
 
-## download and install dependencies
+## Run the api locally
 ```
 cd api
 npm install
