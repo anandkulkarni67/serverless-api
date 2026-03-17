@@ -1,31 +1,16 @@
 # A Serverless API deployed to AWS API Gateway served from Lambda with CICD implementation using Github actions.
 
-## Change directory to API
-```
-cd api
-```
 
 ## download and install dependencies
 ```
+cd api
 npm install
-```
-
-## Compiles the project
-```
 npm run build
-```
 
-## Compiles and minifiesthe project for production deployment
-```
-npm run build
-```
-
-## Run the api locally
-```
 sam local start-api --template-file serverless.yaml
-
 sample http request: http://127.0.0.1:3000/v1/greet
 ```
+
 
 ## GitHub integration
 ```
