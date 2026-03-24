@@ -7,8 +7,13 @@ cd api
 npm install
 npm run build
 
+AWS:
 sam local start-api --template-file serverless.yaml
 sample http request: http://127.0.0.1:3000/v1/greet
+
+Local:
+npm run serve
+sample http request: http://localhost:3000/v1/greet
 ```
 
 
