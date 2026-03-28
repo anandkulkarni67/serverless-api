@@ -19,14 +19,7 @@ sample http request: http://localhost:3000/v1/greet
 
 ## Github integration
 ```
-1. Go to the source code github repository.
-2. Click on Settings.
-3. Click on Environments on the side panel and create a 'production' environment.
-4. Create three secret environment variables.
-   AWS_REGION ( AWS region in which resources are deployed )
-   AWS_ACCOUNT_ID ( ID of the AWS account where resources are deployed )
-   OIDC_ROLE_NAME ( you can find this value in the output of 'security' cloudformation stack )
-5. Install AWS CLI on local machine and configure aws credentials and run following command to create a
+1. Install AWS CLI on local machine and configure aws credentials and run following command to create a
    stack to install resources related to github oidc authentication.
    ./aws-resources/github-oidc/scripts/deploy ${github-username}
    OR
@@ -34,6 +27,13 @@ sample http request: http://localhost:3000/v1/greet
    - Application name - same as the one in package.json in the root directory.
    - Github Username - Github username
    - Github Repository - Github repository name
+2. Go to the source code github repository.
+3. Click on Settings.
+4. Click on Environments on the side panel and create a 'production' environment.
+5. Create three secret environment variables.
+   AWS_REGION ( AWS region in which resources are deployed )
+   AWS_ACCOUNT_ID ( ID of the AWS account where resources are deployed )
+   OIDC_ROLE_NAME ( you can find this value in the output of 'security' cloudformation stack )
 ```
 
 ## AWS Resource creation
