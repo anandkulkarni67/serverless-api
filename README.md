@@ -17,7 +17,7 @@ sample http request: http://localhost:3000/v1/greet
 ```
 
 
-## Github integration
+## Github integration for cloud
 ```
 1. Install AWS CLI on local machine and configure aws credentials and run following command to create a
    stack to install resources related to github oidc authentication.
