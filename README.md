@@ -1,4 +1,4 @@
-# A Serverless API deployed to AWS API Gateway served from Lambda with CICD implementation using Github actions.
+# A Serverless API deployed to AWS API Gateway served from a Lambda function with CICD implementation using Github actions.
 
 
 ## Run the api locally
